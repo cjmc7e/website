@@ -1,0 +1,19 @@
+.navbar {
+    background-color: transparent;
+    width: 100% !important;
+    text-align: left !important;
+    justify-content: left !important;
+    font-size: 30px;
+}
+
+.navdrop {
+    background-color: transparent !important;
+    color: red !important;
+    overflow: wrap;
+}
+
+.link {
+    color: rgba(255, 255, 255, .8) !important;
+    text-decoration: none !important;
+    margin-right: 15px;
+}
