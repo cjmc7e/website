@@ -1,4 +1,4 @@
-Current state (last update Connor 11/8 16:37): \
+Current state (last update Connor 11/9 19:30): \
 \
 npm/React projects initialized, and can be run (use npm run dev in /website/vite-project) \
 \
@@ -10,4 +10,7 @@ CSS is currently an adaptation of Bootstrap's official setup. See links below fo
 \
 <a href="https://react-bootstrap.github.io/docs/components/navbar"> Bootstrap </a> \
 \
-<a href="https://getbootstrap.com/docs/3.4/css/#forms"> Bootstrap's CSS Guide </a> 
+<a href="https://getbootstrap.com/docs/3.4/css/#forms"> Bootstrap's CSS Guide </a>  \
+\
+(10/9 Connor)
+Installed React-Select, a project that allows a better search bar to be used (that can hopefully implement autocomplete), find the documentation <a href='https://react-select.com/home'> here </a>!
