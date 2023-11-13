@@ -1,0 +1,29 @@
+html {
+    justify-content: center !important;
+    justify-items: center !important;
+}
+
+body {
+    display: flex !important;
+    max-width: 100vw;
+    min-height: 100vw !important;
+    background-color: white !important;
+    color: red;
+    align-items: center;
+    justify-content: center;
+}
+
+/* this doesnt actually do anything, see App.jsx for where to make actual edits */
+h1 {
+    text-align: 'center' !important;
+    font-size: '50px' !important;
+    padding-top: '15vw' !important;
+}
+
+.center_container {
+    background-color: transparent;
+    display: flex;
+    height: 100vw;
+    flex-direction: column;
+    max-width: 100%;
+}

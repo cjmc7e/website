@@ -1,35 +1,55 @@
+// Async Search Bar, not sure if it works yet bc the spotiy api calls aren't set up
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import AsyncSelect from 'react-select/async';
+// import { ColourOption, colourOptions } from './data';
+
+// // User input state stuff
+// const [inputValue, setInputValue] = useState('');
+  
+// const loadOptions = async (inputValue) => {
+//   const response = await axios.get(
+//     `https://api.spotify.com/v1/search?q=${inputValue}&type=album`
+//   );
+//   const albums = response.data.albums.items.map((album) => ({
+//     value: album.id,
+//     label: album.name,
+//   }));
+//   return albums;
+// };
+
+// // Export an async search bar
+// export default () => (
+//   <AsyncSelect
+//   cacheOptions
+//   defaultOptions
+//   loadOptions={loadOptions}
+//   onInputChange={(inputValue) => setInputValue(inputValue)}
+//   />
+// );
+
+// NON-ASYNC SEARCH BAR
 import React, { useState } from 'react';
 
 import Select from 'react-select';
-// import { colourOptions } from '../data';
-
-const Checkbox = ({ children, ...props }: JSX.IntrinsicElements['input']) => (
-  <label style={{ marginRight: '1em' }}>
-    <input type="checkbox" {...props} />
-    {children}
-  </label>
-);
+import { colourOptions } from './data';
 
 export default () => {
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
-
   return (
     <>
       <Select
         className="basic-single"
         classNamePrefix="select"
-        // defaultValue={colourOptions[0]}
-        isDisabled={isDisabled}
-        isLoading={isLoading}
-        isClearable={isClearable}
-        isRtl={isRtl}
-        isSearchable={isSearchable}
+        defaultValue={colourOptions[0]}
+        isClearable
+        isSearchable
         name="color"
-        // options={colourOptions}
+        placeholder="hello"
+        classNames={{
+          control: (state) =>
+            state.isFocused ? 'border-red-600' : 'border-grey-300',
+        }}
+        options={colourOptions}
       />
 
       <div
@@ -41,33 +61,6 @@ export default () => {
           marginTop: '1em',
         }}
       >
-        <Checkbox
-          checked={isClearable}
-          onChange={() => setIsClearable((state) => !state)}
-        >
-          Clearable
-        </Checkbox>
-        <Checkbox
-          checked={isSearchable}
-          onChange={() => setIsSearchable((state) => !state)}
-        >
-          Searchable
-        </Checkbox>
-        <Checkbox
-          checked={isDisabled}
-          onChange={() => setIsDisabled((state) => !state)}
-        >
-          Disabled
-        </Checkbox>
-        <Checkbox
-          checked={isLoading}
-          onChange={() => setIsLoading((state) => !state)}
-        >
-          Loading
-        </Checkbox>
-        <Checkbox checked={isRtl} onChange={() => setIsRtl((state) => !state)}>
-          RTL
-        </Checkbox>
       </div>
     </>
   );
