@@ -10,7 +10,7 @@ function NavbarDarkExample() {
   return (
     <Navbar variant="dark" expand="lg" sticky='top' style={{position:'fixed', top: '0'}}>
       <Container fluid>
-        <Navbar.Toggle aria-controls="navbar-dark-example" />
+        {/* <Navbar.Toggle aria-controls="navbar-dark-example" /> */}
         <Navbar.Collapse className="">
         <Navbar.Brand href="#home" className='home' style={{fontSize: '30px', color: '#D71D96'}}>HomeAnthem</Navbar.Brand>
           {/* <Navbar.Text>
