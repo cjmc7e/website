@@ -1,11 +1,25 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const routes = require('./routes');
+const axios = require('axios');
+
+const CLIENT_ID = "71d9ca5c97364a8392bad0a6297e95ea";
+const CLIENT_SECRET = "44750ac84e8d4dcabe3da01f69686e89"
+
+const getToken = async () => {
+
+  const result = await axios('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
+    },
+    body: 'grant_type=client_credentials'
+  });
 
 app.listen(port, () => {    
   console.log(`Example app listening at http://localhost:${port}`);
-});
+})};
 
 const onChange = (e) => {
   var value = e.target.value;
@@ -29,3 +43,13 @@ const onChange = (e) => {
     setSuggestion(value);
   }
 };
+
+const getAlbumUrl = async (token, albumId) => {
+  const result = await axios(`https://api.spotify.com/v1/albums/${albumId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+  return result.data.images[0].url;
+}
