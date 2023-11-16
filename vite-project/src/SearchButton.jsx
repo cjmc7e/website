@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import currAlbumID from './SearchBarPro'
 
-function SearchButton() {
+function SearchButton(props) {
   const [isLoading, setLoading] = useState(false);
+  const id = props.data;
 
   useEffect(() => {
     function simulateNetworkRequest() {
@@ -19,9 +20,8 @@ function SearchButton() {
 
   const handleClick = () => {
     setLoading(true);
-    const id = currAlbumID();
     // send stuff to drawer and code maker here
-    console.log(`sending! here's id: ${id}`)
+    console.log(`sending! here's id: ${id}`);
   }
 
   return (

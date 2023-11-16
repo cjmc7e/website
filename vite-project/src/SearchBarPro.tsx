@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import AsyncSelect from 'react-select/async';
+import { InputActionMeta, ActionMeta } from 'react-select';
 
-const SearchBar = () => {
+const SearchBar = (props: any) => {
   // User input state stuff
   const [inputValue, setInputValue] = useState('');
-  var albumid = "null";
-
-  const onInputChange= (inputValue: string, {action, prevInput}: InputActionMeta) => {
+  
+  const onInputChange = async (inputValue: string, {action}: InputActionMeta) => {
     setInputValue(inputValue);
-    albumid = inputValue;
-    console.log(`ACTION IS>>>>> ${action}`);
-    if (action === 'set-value') {
-      console.log(`ALBUM SELECT`);
-      console.log(`INPUT: ${inputValue}`)
-    }
+    // albumid = inputValue;
+    // console.log(`ACTION IS>>>>> ${action}`);
+    // if (action === 'set-value') {
+    //   console.log(`ALBUM SELECT`);
+    //   console.log(`INPUT: ${inputValue}`);
+    // }
   }
 
   const onChange = async (e) => {
@@ -41,6 +41,7 @@ const SearchBar = () => {
       }
 
       const inputValue = e; // Get the input value
+      console.log(`e: ${JSON.stringify(e)}`);
 
       const searchResponse = await fetch(
         "https://api.spotify.com/v1/search?q=" + inputValue + "&type=album",
@@ -54,7 +55,9 @@ const SearchBar = () => {
       const data = await searchResponse.json();
       console.log(`data: ${data}`);
       console.log(`inputValue: ${inputValue}`)
-      console.log(currAlbumID());
+      props.setData(e.value);
+      console.log(`DATA: ${data}`);
+      console.log(`ALBUM ID: ${data.album}`)
       return data;
     } catch (error) {
       console.error("Error:", error);
@@ -64,24 +67,13 @@ const SearchBar = () => {
   const loadOptions = async (inputValue) => {
     console.log(`input value: ${inputValue}`);
     console.log(`type of input: ${typeof(inputValue)}`);
-    albumid = inputValue.id;
-    console.log(`albumid: ${albumid}`);
     const response = await onChange(inputValue);
     const albums = response.albums.items.map((album) => ({
       value: album.id,
-      label: album.name,
+      label: `${album.name} | ${album.artists[0].name}`,
     }));
-    console.log(`${albums}`);
     return albums;
   };
-
-  const currAlbumID = () => {
-    if (typeof(inputValue) == 'object') {
-      return inputValue.id;
-    } else {
-      return null;
-    }
-  }
 
   return (
     <AsyncSelect
