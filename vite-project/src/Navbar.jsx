@@ -12,7 +12,7 @@ function NavbarDarkExample() {
       <Container fluid>
         {/* <Navbar.Toggle aria-controls="navbar-dark-example" /> */}
         <Navbar.Collapse className="">
-        <Navbar.Brand href="#home" className='home' style={{fontSize: '30px', color: '#D71D96'}}>HomeAnthem</Navbar.Brand>
+        <Navbar.Brand href="#home" className='home' style={{fontSize: '30px', color: '#D71D96', alignSelf: 'left', alignContent: 'left'}}>HomeAnthem</Navbar.Brand>
           {/* <Navbar.Text>
             <a href="/" className='link'>Home        </a>
             <a href="/article1" className='link'>2023 Rankings        </a>

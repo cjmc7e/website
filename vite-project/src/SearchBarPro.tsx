@@ -6,6 +6,17 @@ import AsyncSelect from 'react-select/async';
 const SearchBar = () => {
   // User input state stuff
   const [inputValue, setInputValue] = useState('');
+  var albumid = "null";
+
+  const onInputChange= (inputValue: string, {action, prevInput}: InputActionMeta) => {
+    setInputValue(inputValue);
+    albumid = inputValue;
+    console.log(`ACTION IS>>>>> ${action}`);
+    if (action === 'set-value') {
+      console.log(`ALBUM SELECT`);
+      console.log(`INPUT: ${inputValue}`)
+    }
+  }
 
   const onChange = async (e) => {
     var client_id = "685fe7b45b254865ae76e5ef47b00cbf";
@@ -26,7 +37,7 @@ const SearchBar = () => {
 
       if (response.status === 200) {
         var token = response.data.access_token;
-        console.log(`auth success! this is token: ${token}`)
+        // console.log(`auth success! this is token: ${token}`)
       }
 
       const inputValue = e; // Get the input value
@@ -39,9 +50,11 @@ const SearchBar = () => {
         }
       );
 
-      console.log(`searchResponse: ${searchResponse}`);
+      // console.log(`searchResponse: ${searchResponse}`);
       const data = await searchResponse.json();
       console.log(`data: ${data}`);
+      console.log(`inputValue: ${inputValue}`)
+      console.log(currAlbumID());
       return data;
     } catch (error) {
       console.error("Error:", error);
@@ -49,7 +62,10 @@ const SearchBar = () => {
   };
   
   const loadOptions = async (inputValue) => {
-    console.log(`input value: ${inputValue}`)
+    console.log(`input value: ${inputValue}`);
+    console.log(`type of input: ${typeof(inputValue)}`);
+    albumid = inputValue.id;
+    console.log(`albumid: ${albumid}`);
     const response = await onChange(inputValue);
     const albums = response.albums.items.map((album) => ({
       value: album.id,
@@ -59,6 +75,14 @@ const SearchBar = () => {
     return albums;
   };
 
+  const currAlbumID = () => {
+    if (typeof(inputValue) == 'object') {
+      return inputValue.id;
+    } else {
+      return null;
+    }
+  }
+
   return (
     <AsyncSelect
       cacheOptions
@@ -66,7 +90,7 @@ const SearchBar = () => {
       placeholder={`Search any album...`}
       onChange={onChange}
       loadOptions={loadOptions}
-      onInputChange={(inputValue) => setInputValue(inputValue)}
+      onInputChange={onInputChange}
     />
   );
 };
