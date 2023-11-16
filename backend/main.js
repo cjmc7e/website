@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const axios = require('axios');
 
+
 const CLIENT_ID = "71d9ca5c97364a8392bad0a6297e95ea";
 const CLIENT_SECRET = "44750ac84e8d4dcabe3da01f69686e89"
 
@@ -44,6 +45,23 @@ const onChange = (e) => {
   }
 };
 
+const getStats = async (token, albumId) => {
+  const album = await axios(`https://api.spotify.com/v1/albums/${albumId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+  return {
+    albumCover: album.data.images[0].url,
+    trackListing: album.data.tracks.items.map((track) => track.name),
+    albumName: album.data.name,
+    albumLength: album.data.tracks.items.reduce((acc, track) => acc + track.duration_ms, 0),
+    releaseDate: album.data.release_date
+  };
+  }
+
+
 const getAlbumUrl = async (token, albumId) => {
   const result = await axios(`https://api.spotify.com/v1/albums/${albumId}`, {
     method: 'GET',
@@ -53,3 +71,5 @@ const getAlbumUrl = async (token, albumId) => {
   });
   return result.data.images[0].url;
 }
+
+//album cover, track listing, album name, album length, and release date
