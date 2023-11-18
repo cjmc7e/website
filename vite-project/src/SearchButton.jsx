@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import currAlbumID from './SearchBarPro'
+import { getStats, getToken } from '../../backend/main.js'
 
 function SearchButton(props) {
   const [isLoading, setLoading] = useState(false);
@@ -22,6 +22,15 @@ function SearchButton(props) {
     setLoading(true);
     // send stuff to drawer and code maker here
     console.log(`sending! here's id: ${id}`);
+    // grab stats using id from max's backend main.js
+    // const token = getToken();
+    // console.log(`TOKEN: ${token}`);
+    // const stats = getStats(token, id);
+    // console.log(`STATS: ${JSON.stringify(stats)}`);
+    // TODO: current bug where main.js import doesn't work bc require() can't work in web browser -- need to webpack
+
+    // send stats over to parth's drawing
+    // here!
   }
 
   return (
