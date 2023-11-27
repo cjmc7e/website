@@ -42,12 +42,12 @@ function widther(l,ctx){
           return print
         } 
 }
-
 function imageGen(cover,artist,album,color,tracks,rd,al,code) {
+    const img = new Image(2480, 3508);
+    img.src = "assets/background.png";
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    const img = document.getElementById("back");
-    let y_lim = 3100
+    let y_lim = 3145
 
     const imageWidth = img.width;
     const imageHeight = img.height;
@@ -64,15 +64,16 @@ function imageGen(cover,artist,album,color,tracks,rd,al,code) {
     ctx.font = '500 2.2in Metro';
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 15.6;
+    // guideing line 1
     ctx.beginPath();
     ctx.moveTo(159, 2545);//2545
     ctx.lineTo(2265,2545);//2545
     ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
     ctx.fillText(album, 1400, 2711, 1000);
+    // Tracklisting gen
     const l = upper(tracks)
     let x = 155
     let y = 2795
-    ctx.font = '400 .65in Metro'
     while(l.length != 0){
         let w = widther(l,ctx)
         for (let i = 0; i < w.length; i++){
@@ -86,6 +87,7 @@ function imageGen(cover,artist,album,color,tracks,rd,al,code) {
           pos++
           x += ctx.measureText((pos-1) + ' ' + w[i]).width+30
         }
+        // guideing line 2
         if(l.length == 0){
           ctx.stroke();
         ctx.beginPath();
@@ -108,7 +110,7 @@ function imageGen(cover,artist,album,color,tracks,rd,al,code) {
           y += 73
         
         }
-        y_lim = 3145
+        //bottom stuff
         ctx.font = '500 .6in Metro';
         ctx.fillText('Release Date',136,3275);
         ctx.fillText('Album Length',897,3275);
