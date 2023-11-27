@@ -118,3 +118,4 @@ function imageGen(cover,artist,album,color,tracks,rd,al,code) {
         ctx.fillText(rd,136,3345);
         ctx.fillText(al,897,3345);
         ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
+}
