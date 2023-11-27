@@ -4,11 +4,12 @@ html {
 }
 
 body {
-    display: flex !important;
-    max-width: 100vw;
-    min-height: 100vw !important;
+    /* display: flex !important; */
+    width: 100vw;
+    height: 100vw !important;
     background-color: white !important;
-    color: red;
+    overflow: hidden;
+    color: black;
     align-items: center;
     justify-content: center;
 }
@@ -26,4 +27,5 @@ h1 {
     height: 100vw;
     flex-direction: column;
     max-width: 100%;
+    /* justify-content: center !important; */
 }

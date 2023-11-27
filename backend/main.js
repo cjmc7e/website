@@ -1,7 +1,5 @@
-const express = require('express');
-const app = express();
-const port = 3000;
-const axios = require('axios');
+// const axios = require('axios');
+// TODO: make require work using webpacks, and allow for this call to main.js work!
 
 
 const CLIENT_ID = "71d9ca5c97364a8392bad0a6297e95ea";
@@ -18,9 +16,9 @@ const getToken = async () => {
     body: 'grant_type=client_credentials'
   });
 
-app.listen(port, () => {    
-  console.log(`Example app listening at http://localhost:${port}`);
-})};
+  return result;
+
+};
 
 const onChange = (e) => {
   var value = e.target.value;
@@ -71,5 +69,7 @@ const getAlbumUrl = async (token, albumId) => {
   });
   return result.data.images[0].url;
 }
+
+export { getStats, getToken };
 
 //album cover, track listing, album name, album length, and release date
