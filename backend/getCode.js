@@ -32,8 +32,8 @@ const getLink = async (e) => {
 
       console.log(`searchResponse: ${searchResponse}`);
       const data = await searchResponse.json();
-      const uri = data["uri"];
-      const codeLink = "https://scannables/scdn.co/uri/plain/jpeg/000000/white/640/" + uri;
+      const uri = data.uri;
+      const codeLink = "https://scannables.scdn.co/uri/plain/png/000000/white/640/"+ uri;
       console.log(`data: ${data}`);
       return codelink;
     } catch (error) {
@@ -41,4 +41,4 @@ const getLink = async (e) => {
     }
   };
   
-export default SearchBar;
+export default getLink;
