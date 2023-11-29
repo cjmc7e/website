@@ -30,15 +30,17 @@ const getLink = async (e) => {
         }
       );
 
-      console.log(`searchResponse: ${searchResponse}`);
+      // console.log(`searchResponse: ${searchResponse}`);
       const data = await searchResponse.json();
-      const uri = data["uri"];
-      const codeLink = "https://scannables/scdn.co/uri/plain/jpeg/000000/white/640/" + uri;
-      console.log(`data: ${data}`);
-      return codelink;
+      const uri = data.uri;
+      const codeLink = "https://scannables.scdn.co/uri/plain/png/000000/white/640/"+ uri;
+      // console.log(`data: ${data}`);
+      let img = new Image();
+      img.src = codeLink;
+      return img;
     } catch (error) {
       console.error("Error:", error);
     }
   };
   
-export default SearchBar;
+export default getLink;
