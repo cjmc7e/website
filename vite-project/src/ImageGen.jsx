@@ -4,6 +4,7 @@ const boldMetro = new FontFace('Metro', 'url(fonts/Metropolis-Bold.otf)', { weig
 document.fonts.add(Metro);
 document.fonts.add(boldMetro);
 document.fonts.add(semiboldMetro);
+import { getColor, getPalette } from 'colorthief';
 var pos = 1
 function upper(lst){
     for (let i = 0; i < lst.length; i++) {
@@ -42,7 +43,30 @@ function widther(l,ctx){
           return print
         } 
 }
-function imageGen(cover,artist,album,color,tracks,rd,al,code) {
+
+function palletegen(img){
+let colors = getPalette(img, 9)
+    .then(palette => { console.log(palette) })
+    .catch(err => { console.log(err) })
+    const canvas = document.getElementById('pallete')
+    canvas.width = 1185;
+    canvas.height = 144;
+    const ctx = canvas.getContext("2d");
+    let x = 0
+    let y = 0
+    for (let i = 0; i < colors.length; i++){
+      let colorstring = 'rgb('
+      for (let j = 0; j < colors[i].length; j++){
+        colorstring += j + ','
+      }
+      colorstring += ')'
+      ctx.fillStyle = colorstring;
+      ctx.fillrect(x,y,131,143)
+      x+=131
+      x+=143
+    }
+}
+function imageGen(cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
     img.src = "assets/background.png";
     const canvas = document.getElementById("canvas");
@@ -68,13 +92,14 @@ function imageGen(cover,artist,album,color,tracks,rd,al,code) {
     ctx.beginPath();
     ctx.moveTo(159, 2545);//2545
     ctx.lineTo(2265,2545);//2545
+    let color = palletegen(cover)
     ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
     ctx.fillText(album, 1400, 2711, 1000);
     // Tracklisting gen
     const l = upper(tracks)
     let x = 155
     let y = 2795
-    while(l.length != 0){
+    while(l.length != 0){ 
         let w = widther(l,ctx)
         for (let i = 0; i < w.length; i++){
           ctx.font = '500 .65in Metro'
