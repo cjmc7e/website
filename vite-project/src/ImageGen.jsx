@@ -1,4 +1,3 @@
-import React from 'react';
 import 'colorthief'
 
 const Metro = new FontFace('Metro', 'url(fonts/Metropolis-Medium.otf)', {weight: 400});
@@ -74,11 +73,9 @@ let colors = getPalette(img, 9)
     }
       return canvas}
 
-function imageGen(cover,artist,album,tracks,rd,al,code) {
+function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
-    img.src = "assets/background.png";
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+    img.src = "./assets/background.png";
     let y_lim = 3145
 
     const imageWidth = img.width;
@@ -154,26 +151,4 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
         ctx.fillText(al,897,3345);
         ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
 }
-
-class CanvasDownloadButton extends React.Component {
-  downloadCanvas = () => {
-    const canvas = document.getElementById('canvas');
-    const dataUrl = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.download = 'canvas.png';
-    link.href = dataUrl;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  render() {
-    return (
-      <button onClick={this.downloadCanvas}>
-        Download Canvas
-      </button>
-    );
-  }
-}
-
-export default CanvasDownloadButton;
+export default imageGen()
