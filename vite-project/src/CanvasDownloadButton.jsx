@@ -1,3 +1,4 @@
+import React from "react";
 
 class CanvasDownloadButton extends React.Component {
   downloadCanvas = () => {

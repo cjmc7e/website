@@ -12,7 +12,7 @@ const CanvasComponent = () => {
       setCtx(ctx);
     }, []);
   
-    ImageGen(canvas,ctx,)
+    //ImageGen(canvas,ctx,)
   
     return (
       <div>
@@ -20,3 +20,4 @@ const CanvasComponent = () => {
       </div>
     );
   };
+  export default Canvas;
