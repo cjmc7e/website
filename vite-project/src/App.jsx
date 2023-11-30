@@ -2,6 +2,7 @@ import SearchBar from './SearchBar'
 import Navbar from './Navbar'
 import SearchBarPro from './SearchBarPro'
 import SearchButton from './SearchButton'
+import CanvasDownloadButton from './ImageGen'
 import "./home.css"
 import { useState } from 'react'
 
@@ -20,7 +21,7 @@ function App() {
         <br />
         <SearchButton data={data} />
         <canvas id='canvas'className="myCanvas"></canvas>
-        
+        <CanvasDownloadButton />
         
 
       </div>
