@@ -1,11 +1,11 @@
-// const axios = require('axios');
+// const axios = require('esmify/resolve')('axios');
 // TODO: make require work using webpacks, and allow for this call to main.js work!
 
 
 const CLIENT_ID = "71d9ca5c97364a8392bad0a6297e95ea";
-const CLIENT_SECRET = "44750ac84e8d4dcabe3da01f69686e89"
+const CLIENT_SECRET = "44750ac84e8d4dcabe3da01f69686e89";
 
-const getToken = async () => {
+async function getToken() {
 
   const result = await axios('https://accounts.spotify.com/api/token', {
     method: 'POST',
@@ -43,7 +43,7 @@ const onChange = (e) => {
   }
 };
 
-const getStats = async (token, albumId) => {
+ async function getStats(token, albumId) {
   const album = await axios(`https://api.spotify.com/v1/albums/${albumId}`, {
     method: 'GET',
     headers: {

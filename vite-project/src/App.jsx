@@ -19,6 +19,7 @@ function App() {
         <SearchBarPro setData={setData} />
         {/* <div> {data} </div> */}
         <br />
+        {/* <script src="bundle.js"></script> */}
         <SearchButton data={data} />
         <canvas id='canvas'className="myCanvas"></canvas>
         <CanvasDownloadButton />
