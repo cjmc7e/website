@@ -1,4 +1,5 @@
 import React from 'react';
+import 'colorthief'
 
 const Metro = new FontFace('Metro', 'url(fonts/Metropolis-Medium.otf)', {weight: 400});
 const semiboldMetro = new FontFace('Metro', 'url(fonts/Metropolis-SemiBold.otf)', { weight: 500 });
@@ -6,7 +7,6 @@ const boldMetro = new FontFace('Metro', 'url(fonts/Metropolis-Bold.otf)', { weig
 document.fonts.add(Metro);
 document.fonts.add(boldMetro);
 document.fonts.add(semiboldMetro);
-import { getColor, getPalette } from 'colorthief';
 var pos = 1
 function upper(lst){
     for (let i = 0; i < lst.length; i++) {
