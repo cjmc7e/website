@@ -73,6 +73,7 @@ let colors = getPalette(img, 9)
       x+=143
     }
       return canvas}
+
 function imageGen(cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
     img.src = "assets/background.png";
@@ -156,7 +157,7 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
 
 class CanvasDownloadButton extends React.Component {
   downloadCanvas = () => {
-    const canvas = document.getElementById('myCanvas');
+    const canvas = document.getElementById('canvas');
     const dataUrl = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.download = 'canvas.png';
