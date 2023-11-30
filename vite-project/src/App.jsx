@@ -19,6 +19,10 @@ function App() {
         {/* <div> {data} </div> */}
         <br />
         <SearchButton data={data} />
+        <canvas id='canvas'className="myCanvas"></canvas>
+        
+        
+
       </div>
     </>
   )

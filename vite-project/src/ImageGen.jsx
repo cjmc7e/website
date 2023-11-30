@@ -12,7 +12,12 @@ function upper(lst){
       }
       return lst
 }
-
+function download() {
+  var download = document.getElementById("download");
+  var image = document.getElementById("canvas").toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+  download.setAttribute("href", image);
+}
 
 function widther(l,ctx){
   if (l.length == 0){
@@ -65,7 +70,7 @@ let colors = getPalette(img, 9)
       x+=131
       x+=143
     }
-}
+      return canvas}
 function imageGen(cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
     img.src = "assets/background.png";
