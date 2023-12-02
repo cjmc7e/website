@@ -105,25 +105,27 @@ function parseDate(rd) {
   return day + " " + month_word + " " + year;
 }
 
-function imageGen(coversrc,artist,album,tracks,rd,al,codesrc) {
+function imageGen(cover,artist,album,tracks,rd,al,code) {
   const canvas = document.createElement('canvas');
     canvas.id = 'Poster'
     const img = new Image(2480, 3508);
     const ctx = canvas.getContext('2d')
-
     let y_lim = 3145
-    const cover = new Image()
-    cover.src = coversrc
-    const code = new Image()
-    code.src = codesrc
-
+    console.log('img'+cover)
+    rd = parseDate(rd)
+    al = parseTime(al)
+    tracks = parseTracks(tracks)
     const imageWidth = img.width;
     const imageHeight = img.height;
     canvas.width = imageWidth;
-    
     canvas.height = imageHeight;
-    ctx.drawImage(img, 0, 0, imageWidth, imageHeight);
-    ctx.drawImage(cover, 162, 112, 2100, 2100); //cover needs to be 2100x2100
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black'
+    cover.onload = () => {
+      ctx.drawImage(cover, 162, 112, 2100, 2100);
+    };
+     //cover needs to be 2100x2100
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
     ctx.fillText(artist, 165, 2470, 2100);
@@ -188,7 +190,7 @@ function imageGen(coversrc,artist,album,tracks,rd,al,codesrc) {
         ctx.fillText(al,897,3345);
         ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
         const dataUrl = canvas.toDataURL('image/png');
-        pos =1
+        pos = 1;
         return dataUrl
 }
 export default imageGen

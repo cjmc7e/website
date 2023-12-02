@@ -117,13 +117,13 @@ function SearchButton(props) {
     const rd = stats["releaseDate"]
     const code = new Image()
     code.src = stats["code"]
-    code.onload = () => { const URL = ImageGen(cover,artist,album1,tracks,rd,al,code)
+      const URL = ImageGen(cover,artist,album1,tracks,rd,al,code)
       const link = document.createElement('a');
       link.download = 'canvas.png';
       link.href = URL;
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);}
+      document.body.removeChild(link);
    
   }
 
