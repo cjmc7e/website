@@ -112,6 +112,7 @@ function parseDate(rd) {
 
 function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
+    const ctx = canvas.current.getContext('2d')
     img.src = "./assets/background.png";
     let y_lim = 3145
 
@@ -123,7 +124,7 @@ function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
     
     canvas.height = imageHeight;
     ctx.drawImage(img, 0, 0, imageWidth, imageHeight);
-    ctx.drawImage(cover, 162, 112, coverw*2.1, coverh*2.1); //cover needs to be 2100x2100
+    ctx.drawImage(cover, 162, 112, 2100, 2100); //cover needs to be 2100x2100
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
     ctx.fillText(artist, 165, 2470, 2100);
