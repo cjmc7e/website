@@ -1,4 +1,3 @@
-import CT from 'colorthief'
 import { useRef } from 'react';
 
 const Metro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Medium.otf)', {weight: 400});
