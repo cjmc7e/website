@@ -68,6 +68,43 @@ imger.src = 'assets/color pallet.png'
 //     }
        return imger}
 
+function parseTracks(tracks) {
+  return tracks.map((track) => {
+    var end = track.search(/\(/);
+    if (end != -1) {
+      let ret = track.slice(0, end - 1);
+      return ret;
+    } else {
+        return track;
+    }
+  })
+}
+
+function parseTime(al) {
+  var milliseconds = Math.floor((al % 1000) / 100),
+    seconds = Math.floor((al / 1000) % 60),
+    minutes = Math.floor((al / (1000 * 60)) % 60),
+    hours = Math.floor((al / (1000 * 60 * 60)) % 24);
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+  let ret = (hours < 1) ? minutes + "m " + seconds + "s" : hours + "h " + minutes + "m " + seconds + "s";
+  return ret;
+
+}
+
+function parseDate(rd) {
+  const months = {"01": "January", "02": "February", "03": "March", "04":"April", "05":"May", "06":"June", "07":"July", "08":"August", "09":"September", "10":"October", "11":"November", "12":"December"};
+  let date = rd.split("-");
+  let year = date[0];
+  let month = date[1];
+  let day = date[2];
+  let month_word = months[month];
+  return day + " " + month_word + " " + year;
+}
+
 function imageGen(coversrc,artist,album,tracks,rd,al,codesrc) {
   const canvas = document.createElement('canvas');
     canvas.id = 'Poster'
