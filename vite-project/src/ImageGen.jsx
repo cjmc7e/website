@@ -75,11 +75,13 @@ let colors = getPalette(img, 9)
 
 function parseTracks(tracks) {
   return tracks.map((track) => {
-    var end = track.search("(");
+    var end = track.search(/\(/);
     if (end != -1) {
-      return track.slice(0, end);
+      let ret = track.slice(0, end - 1);
+      return ret;
+    } else {
+        return track;
     }
-    return track;
   })
 }
 
@@ -99,8 +101,13 @@ function parseTime(al) {
 }
 
 function parseDate(rd) {
-  let year, month, day = rd.split("-"); 
-  
+  const months = {"01": "January", "02": "February", "03": "March", "04":"April", "05":"May", "06":"June", "07":"July", "08":"August", "09":"September", "10":"October", "11":"November", "12":"December"};
+  let date = rd.split("-");
+  let year = date[0];
+  let month = date[1];
+  let day = date[2];
+  let month_word = months[month];
+  return day + " " + month_word + " " + year;
 }
 
 function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
