@@ -1,23 +1,15 @@
-import 'colorthief'
+import CT from 'colorthief'
+import { useRef } from 'react';
 
-const Metro = new FontFace('Metro', 'url(fonts/Metropolis-Medium.otf)', {weight: 400});
-const semiboldMetro = new FontFace('Metro', 'url(fonts/Metropolis-SemiBold.otf)', { weight: 500 });
-const boldMetro = new FontFace('Metro', 'url(fonts/Metropolis-Bold.otf)', { weight: 700 });
+const Metro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Medium.otf)', {weight: 400});
+const semiboldMetro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-SemiBold.otf)', { weight: 500 });
+const boldMetro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Bold.otf)', { weight: 700 });
 document.fonts.add(Metro);
 document.fonts.add(boldMetro);
 document.fonts.add(semiboldMetro);
 var pos = 1
 function upper(lst){
-    for (let i = 0; i < lst.length; i++) {
-        lst[i]= lst[i].toUpperCase()
-      }
-      return lst
-}
-function download() {
-  var download = document.getElementById("download");
-  var image = document.getElementById("canvas").toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-  download.setAttribute("href", image);
+    return lst.map((track) => track.toUpperCase());
 }
 
 function widther(l,ctx){
@@ -51,38 +43,45 @@ function widther(l,ctx){
 }
 
 function palletegen(img){
-let colors = getPalette(img, 9)
-    .then(palette => { console.log(palette) })
-    .catch(err => { console.log(err) })
-    const canvas = document.getElementById('pallete')
-    canvas.width = 1185;
-    canvas.height = 144;
-    const ctx = canvas.getContext("2d");
-    let x = 0
-    let y = 0
-    for (let i = 0; i < colors.length; i++){
-      let colorstring = 'rgb('
-      for (let j = 0; j < colors[i].length; j++){
-        colorstring += j + ','
-      }
-      colorstring += ')'
-      ctx.fillStyle = colorstring;
-      ctx.fillrect(x,y,131,143)
-      x+=131
-      x+=143
-    }
-      return canvas}
+const imger = new Image
+imger.src = 'assets/color pallet.png'
 
-function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
+// let colors = CT.getPalette(img, 9)
+//     .then(palette => { console.log(palette) })
+//     .catch(err => { console.log(err) })
+//     const canvas = document.getElementById('pallete')
+//     canvas.width = 1185;
+//     canvas.height = 144;
+//     const ctx = canvas.getContext("2d");
+//     let x = 0
+//     let y = 0
+//     for (let i = 0; i < colors.length; i++){
+//       let colorstring = 'rgb('
+//       for (let j = 0; j < colors[i].length; j++){
+//         colorstring += j + ','
+//       }
+//       colorstring += ')'
+//       ctx.fillStyle = colorstring;
+//       ctx.fillrect(x,y,131,143)
+//       x+=131
+//       x+=143
+//     }
+       return imger}
+
+function imageGen(coversrc,artist,album,tracks,rd,al,codesrc) {
+  const canvas = document.createElement('canvas');
+    canvas.id = 'Poster'
     const img = new Image(2480, 3508);
-    const ctx = canvas.current.getContext('2d')
-    img.src = "./assets/background.png";
+    const ctx = canvas.getContext('2d')
+
     let y_lim = 3145
+    const cover = new Image()
+    cover.src = coversrc
+    const code = new Image()
+    code.src = codesrc
 
     const imageWidth = img.width;
     const imageHeight = img.height;
-    const coverw = cover.width;
-    const coverh = cover.height;
     canvas.width = imageWidth;
     
     canvas.height = imageHeight;
@@ -151,5 +150,8 @@ function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
         ctx.fillText(rd,136,3345);
         ctx.fillText(al,897,3345);
         ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
+        const dataUrl = canvas.toDataURL('image/png');
+        pos =1
+        return dataUrl
 }
-export default imageGen()
+export default imageGen

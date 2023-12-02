@@ -3,7 +3,6 @@ import Navbar from './Navbar'
 import SearchBarPro from './SearchBarPro'
 import SearchButton from './SearchButton'
 import CanvasDownloadButton from './CanvasDownloadButton'
-//import Canvas from './Canvas'
 
 import "./home.css"
 import { useState } from 'react'
@@ -26,7 +25,6 @@ function App() {
         <br />
         {/* <script src="bundle.js"></script> */}
         <SearchButton data={data} setStats={setStats}/>
-        {/*<Canvas/>*/}
         <CanvasDownloadButton />
         
 

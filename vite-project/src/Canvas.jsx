@@ -1,19 +1,25 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
 import ImageGen from './ImageGen';
 
 
-function Canvas(props) {
-  const canvasRef = useRef(null);
+function Poster(props) {
   const stats = props.stats
-  const cover = albumCover
-  const tracks = trackListing
-  const album = albumName
-  const al = albumLength
-  const rd = releaseDate 
+  const cover = new Image()
+  cover.src = stats["albumCover"]
+  const artist = stats["artist"]
+  const tracks = stats["trackListing"]
+  console.log(tracks)
+  const album = stats["albumName"]
+  const al = stats["albumLength"]
+  const rd = stats["releaseDate"]
+  const code = new Image()
+  code.src = stats["code"]
+  
   return (
-    <canvas ref={canvasRef}/>
-    ImageGen(canvasRef,)
+    ImageGen(cover,artist,album,tracks,rd,al,code)
   );
 }
 
-  export default Canvas;
+  export default Poster;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';  
 import axios from 'axios';
+import ImageGen from './ImageGen';
 // import getLink from <backend />;
 
 async function getLink(e) {
@@ -40,9 +41,8 @@ async function getLink(e) {
       const uri = data.uri;
       const codeLink = "https://scannables.scdn.co/uri/plain/png/000000/white/640/"+ uri;
       // console.log(`data: ${data}`);
-      let img = new Image();
-      img.src = codeLink;
-      return img;
+      console.log('CodeLink' + codeLink);
+      return codeLink;
     } catch (error) {
       console.error("Error:", error);
     }
@@ -95,17 +95,36 @@ function SearchButton(props) {
       'Authorization': 'Bearer ' + token
     }
     });
+    let code2 = await getLink(id)
     const stats = {
     albumCover: album.data.images[0].url,
     trackListing: album.data.tracks.items.map((track) => track.name),
     albumName: album.data.name,
+    artist:album.data.artists[0].name,
     albumLength: album.data.tracks.items.reduce((acc, track) => acc + track.duration_ms, 0),
-    releaseDate: album.data.release_date
+    releaseDate: album.data.release_date,
+    code: code2
     };
     console.log(`STATS: ${JSON.stringify(stats)}`);
-    props.setStats(stats);
-    // send stats over to parth's drawing
-    // here!
+    console.log(`Album Length: ` + stats["albumLength"]);
+    const cover = new Image()
+    cover.src = stats["albumCover"]
+    const artist = stats["artist"]
+    const tracks = stats["trackListing"]
+    console.log(tracks)
+    const album1 = stats["albumName"]
+    const al = stats["albumLength"]
+    const rd = stats["releaseDate"]
+    const code = new Image()
+    code.src = stats["code"]
+    code.onload = () => { const URL = ImageGen(cover,artist,album1,tracks,rd,al,code)
+      const link = document.createElement('a');
+      link.download = 'canvas.png';
+      link.href = URL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);}
+   
   }
 
   return (
@@ -116,6 +135,7 @@ function SearchButton(props) {
     >
       {/* define button words */}
       {isLoading ? 'Loading…' : 'Create Poster!'}
+
     </Button>
   );
 }
