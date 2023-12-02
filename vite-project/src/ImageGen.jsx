@@ -73,7 +73,7 @@ let colors = getPalette(img, 9)
     }
       return canvas}
 
-function imageGen(canvas,cover,artist,album,tracks,rd,al,code) {
+function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
     const ctx = canvas.current.getContext('2d')
     img.src = "./assets/background.png";
