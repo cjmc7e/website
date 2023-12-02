@@ -2,7 +2,7 @@ import React from "react";
 
 class CanvasDownloadButton extends React.Component {
   downloadCanvas = () => {
-    const canvas = document.getElementById('canvas');
+    const canvas =  ReactDOM.findDOMNode;
     const dataUrl = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.download = 'canvas.png';

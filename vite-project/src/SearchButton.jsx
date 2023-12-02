@@ -103,7 +103,7 @@ function SearchButton(props) {
     releaseDate: album.data.release_date
     };
     console.log(`STATS: ${JSON.stringify(stats)}`);
-    
+    props.setStats(stats);
     // send stats over to parth's drawing
     // here!
   }
