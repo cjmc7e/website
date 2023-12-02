@@ -73,6 +73,36 @@ let colors = getPalette(img, 9)
     }
       return canvas}
 
+function parseTracks(tracks) {
+  return tracks.map((track) => {
+    var end = track.search("(");
+    if (end != -1) {
+      return track.slice(0, end);
+    }
+    return track;
+  })
+}
+
+function parseTime(al) {
+  var milliseconds = Math.floor((al % 1000) / 100),
+    seconds = Math.floor((al / 1000) % 60),
+    minutes = Math.floor((al / (1000 * 60)) % 60),
+    hours = Math.floor((al / (1000 * 60 * 60)) % 24);
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+  let ret = (hours < 1) ? minutes + "m " + seconds + "s" : hours + "h " + minutes + "m " + seconds + "s";
+  return ret;
+
+}
+
+function parseDate(rd) {
+  let year, month, day = rd.split("-"); 
+  
+}
+
 function imageGen(canvas,ctx,cover,artist,album,tracks,rd,al,code) {
     const img = new Image(2480, 3508);
     img.src = "./assets/background.png";
