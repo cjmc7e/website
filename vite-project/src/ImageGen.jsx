@@ -133,15 +133,15 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
                               resolve(image)};
         image.onerror = () => reject('Image loading failed');
       });
-      await new Promise((resolve, reject) => {
-        console.log(cover)
-          const image2 = new Image();
-          image2.crossOrigin = ''
-          image2.src = 'src/assets/ColorPalette.png';
-          image2.onload = () => {ctx.drawImage(image2,159, 2560);
-                                resolve(image2)};
-          image2.onerror = () => reject('Image loading failed');
-        });
+      // await new Promise((resolve, reject) => {
+      //   console.log(cover)
+      //     const image2 = new Image();
+      //     image2.crossOrigin = ''
+      //     image2.src = 'src/assets/ColorPalette.png';
+      //     image2.onload = () => {ctx.drawImage(image2,159, 2560);
+      //                           resolve(image2)};
+      //     image2.onerror = () => reject('Image loading failed');
+      //   });
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
     ctx.fillText(artist, 165, 2470, 2100);
@@ -154,7 +154,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
     ctx.lineTo(2265,2545);//2545
     //let color = palletegen(cover)
    // ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
-    ctx.fillText(album, 1400, 2711, 1000);
+    ctx.fillText(album, 159, 2711, 2000);
     // Tracklisting gen
     const l = upper(tracks)
     let x = 155
