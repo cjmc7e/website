@@ -107,10 +107,12 @@ function parseDate(rd) {
 function imageGen(cover,artist,album,tracks,rd,al,code) {
   const canvas = document.createElement('canvas');
     canvas.id = 'Poster'
+    const cover1 = document.createElement('img')
+    cover1.src = cover.src
     const img = new Image(2480, 3508);
     const ctx = canvas.getContext('2d')
     let y_lim = 3145
-    console.log('img'+cover)
+    console.log(cover1)
     rd = parseDate(rd)
     al = parseTime(al)
     tracks = parseTracks(tracks)
@@ -121,9 +123,7 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black'
-    cover.onload = () => {
-      ctx.drawImage(cover, 162, 112, 2100, 2100);
-    };
+      ctx.drawImage(cover1, 162, 112, 2100, 2100);
      //cover needs to be 2100x2100
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
@@ -183,7 +183,7 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
         ctx.fillText('Release Date',136,3275);
         ctx.fillText('Album Length',897,3275);
         ctx.font = '500 1in Metro';
-        ctx.fillText(album,1963,3275);
+        ctx.fillText(album,1963,3275,2000);
         ctx.font = '400 .65in Metro';
         ctx.fillText(rd,136,3345);
         ctx.fillText(al,897,3345);
