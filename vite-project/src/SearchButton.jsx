@@ -119,7 +119,7 @@ function SearchButton(props) {
     const code = stats["code"]
     //code.setAttribute("display", "none");
     //document.body.appendChild(code);
-      const URL = ImageGen(cover,artist,album1,tracks,rd,al,code)
+      const URL = await ImageGen(cover,artist,album1,tracks,rd,al,code)
       const link = document.createElement('a');
       link.download = album1+" "+ artist +'.png';
       link.href = URL;

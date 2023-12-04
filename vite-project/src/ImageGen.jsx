@@ -45,8 +45,8 @@ function widther(l,ctx){
 }
 
 function palletegen(img){
-const imger = new Image
-imger.src = 'assets/color pallet.png'
+const imger = new Image();
+imger.src = 'assets/basic-palette.png';
 
 // let colors = CT.getPalette(img, 9)
 //     .then(palette => { console.log(palette) })
@@ -110,16 +110,12 @@ function parseDate(rd) {
   return day + " " + month_word + " " + year;
 }
 
-
-function imageGen(cover1,artist,album,tracks,rd,al,code1) {
-  const canvas = document.createElement('canvas'); 
-
-    const Cover = () => {
-      const [image] = useImage(cover1)
-      return <Image image={image}/>;
-    }
-    //const code = new Image()
-   // code.src = code1
+async function imageGen(cover,artist,album,tracks,rd,al,code) {
+  const canvas = document.createElement('canvas');
+    canvas.id = 'Poster'
+    const cover1 = document.createElement('img')
+    cover1.src = cover.src;
+    const img = new Image(2480, 3508);
     const ctx = canvas.getContext('2d')
     let y_lim = 3145
     console.log(Cover)
@@ -131,8 +127,19 @@ function imageGen(cover1,artist,album,tracks,rd,al,code1) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black'
-    ctx.drawImage(Cover, 162, 112, 2100, 2100);
-     //cover needs to be 2100x2100
+    // ctx.drawImage(cover1, 162, 112, 2100, 2100);
+    await fetch(cover1.src)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+        img.onload = function() {
+          //cover needs to be 2100x2100
+          ctx.drawImage(img, 162, 112, 2100, 2100);
+        };
+    img.src = url;
+    });
+    
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
     ctx.fillText(artist, 165, 2470, 2100);
