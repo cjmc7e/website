@@ -137,7 +137,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         console.log(cover)
           const image2 = new Image();
           image2.crossOrigin = ''
-          image2.src = 'src/assets/basic-palette.png';
+          image2.src = 'src/assets/ColorPalette.png';
           image2.onload = () => {ctx.drawImage(image2,159, 2560);
                                 resolve(image2)};
           image2.onerror = () => reject('Image loading failed');
