@@ -1,4 +1,7 @@
 import { useRef } from 'react';
+import {useImage} from 'use-image'
+import { Image } from 'react-konva';
+
 
 const Metro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Medium.otf)', {weight: 400});
 const semiboldMetro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-SemiBold.otf)', { weight: 500 });
@@ -101,29 +104,34 @@ function parseDate(rd) {
   let month = date[1];
   let day = date[2];
   let month_word = months[month];
+  if (day == undefined){
+    return month_word + " " + year;  
+  }
   return day + " " + month_word + " " + year;
 }
 
-function imageGen(cover,artist,album,tracks,rd,al,code) {
-  const canvas = document.createElement('canvas');
-    canvas.id = 'Poster'
-    const cover1 = document.createElement('img')
-    cover1.src = cover.src
-    const img = new Image(2480, 3508);
+
+function imageGen(cover1,artist,album,tracks,rd,al,code1) {
+  const canvas = document.createElement('canvas'); 
+
+    const Cover = () => {
+      const [image] = useImage(cover1)
+      return <Image image={image}/>;
+    }
+    //const code = new Image()
+   // code.src = code1
     const ctx = canvas.getContext('2d')
     let y_lim = 3145
-    console.log(cover1)
+    console.log(Cover)
     rd = parseDate(rd)
     al = parseTime(al)
     tracks = parseTracks(tracks)
-    const imageWidth = img.width;
-    const imageHeight = img.height;
-    canvas.width = imageWidth;
-    canvas.height = imageHeight;
+    canvas.width = 2480;
+    canvas.height = 3508;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black'
-      ctx.drawImage(cover1, 162, 112, 2100, 2100);
+    ctx.drawImage(Cover, 162, 112, 2100, 2100);
      //cover needs to be 2100x2100
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
@@ -135,8 +143,8 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
     ctx.beginPath();
     ctx.moveTo(159, 2545);//2545
     ctx.lineTo(2265,2545);//2545
-    let color = palletegen(cover)
-    ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
+    //let color = palletegen(cover)
+   // ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
     ctx.fillText(album, 1400, 2711, 1000);
     // Tracklisting gen
     const l = upper(tracks)
@@ -183,11 +191,11 @@ function imageGen(cover,artist,album,tracks,rd,al,code) {
         ctx.fillText('Release Date',136,3275);
         ctx.fillText('Album Length',897,3275);
         ctx.font = '500 1in Metro';
-        ctx.fillText(album,1963,3275,2000);
+        ctx.fillText(album,1963,3275,500);
         ctx.font = '400 .65in Metro';
         ctx.fillText(rd,136,3345);
         ctx.fillText(al,897,3345);
-        ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
+       // ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
         const dataUrl = canvas.toDataURL('image/png');
         pos = 1;
         return dataUrl

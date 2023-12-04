@@ -1,25 +1,28 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
-import ImageGen from './ImageGen';
+import useImage from 'use-image';
 
-
-function Poster(props) {
-  const stats = props.stats
-  const cover = new Image()
-  cover.src = stats["albumCover"]
-  const artist = stats["artist"]
-  const tracks = stats["trackListing"]
-  console.log(tracks)
-  const album = stats["albumName"]
-  const al = stats["albumLength"]
-  const rd = stats["releaseDate"]
-  const code = new Image()
-  code.src = stats["code"]
+function URLImage(props) {
+  const [image, setImage] = useState(null);
+  useEffect(() => {
+  loadImage();
+  }, [props.src]);
   
+  function loadImage() {
+  const image = new window.Image();
+  image.src = props.src;
+  image.onload = () => {
+  setImage(image);
+  };
+  }
   return (
-    ImageGen(cover,artist,album,tracks,rd,al,code)
+  <stage width="{window.innerWidth}" height="{window.innerHeight}">
+  <layer>
+  <image image="{image}" x="{props.x}" y="{props.y}"></image>
+  </layer>
+  </stage>
   );
-}
+  }
 
   export default Poster;

@@ -107,19 +107,21 @@ function SearchButton(props) {
     };
     console.log(`STATS: ${JSON.stringify(stats)}`);
     console.log(`Album Length: ` + stats["albumLength"]);
-    const cover = new Image()
-    cover.src = stats["albumCover"]
+    const cover = stats["albumCover"]
+    //cover.setAttribute("display", "none");
+    //document.body.appendChild(cover);
     const artist = stats["artist"]
     const tracks = stats["trackListing"]
     console.log(tracks)
     const album1 = stats["albumName"]
     const al = stats["albumLength"]
     const rd = stats["releaseDate"]
-    const code = new Image()
-    code.src = stats["code"]
+    const code = stats["code"]
+    //code.setAttribute("display", "none");
+    //document.body.appendChild(code);
       const URL = ImageGen(cover,artist,album1,tracks,rd,al,code)
       const link = document.createElement('a');
-      link.download = 'canvas.png';
+      link.download = album1+" "+ artist +'.png';
       link.href = URL;
       document.body.appendChild(link);
       link.click();
