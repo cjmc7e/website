@@ -39,7 +39,7 @@ async function getLink(e) {
       // console.log(`searchResponse: ${searchResponse}`);
       const data = await searchResponse.json();
       const uri = data.uri;
-      const codeLink = "https://scannables.scdn.co/uri/plain/png/000000/white/640/"+ uri;
+      const codeLink = "https://scannables.scdn.co/uri/plain/png/FFFFFFF/black/640/"+ uri;
       // console.log(`data: ${data}`);
       console.log('CodeLink' + codeLink);
       return codeLink;
@@ -119,7 +119,9 @@ function SearchButton(props) {
     const code = stats["code"]
     //code.setAttribute("display", "none");
     //document.body.appendChild(code);
+    console.log(cover)
       const URL = await ImageGen(cover,artist,album1,tracks,rd,al,code)
+    
       const link = document.createElement('a');
       link.download = album1+" "+ artist +'.png';
       link.href = URL;

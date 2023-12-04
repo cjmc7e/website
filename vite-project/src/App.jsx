@@ -25,7 +25,7 @@ function App() {
         <br />
         {/* <script src="bundle.js"></script> */}
         <SearchButton data={data} setStats={setStats}/>
-        <CanvasDownloadButton />
+        {/*<CanvasDownloadButton />*/}
         
 
       </div>

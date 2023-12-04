@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import {useImage} from 'use-image'
-import { Image } from 'react-konva';
 
 
-const Metro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Medium.otf)', {weight: 400});
-const semiboldMetro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-SemiBold.otf)', { weight: 500 });
-const boldMetro = new FontFace('Metro', 'url(./assets/fonts/Metropolis-Bold.otf)', { weight: 700 });
+const Metro = new FontFace('Metro', 'url(src/assets/fonts/Metropolis-Medium.otf)', {weight: 400});
+const semiboldMetro = new FontFace('Metro', 'url(src/assets/fonts/Metropolis-SemiBold.otf)', { weight: 500 });
+const boldMetro = new FontFace('Metro', 'url(src/assets/fonts/Metropolis-Bold.otf)', { weight: 700 });
 document.fonts.add(Metro);
 document.fonts.add(boldMetro);
 document.fonts.add(semiboldMetro);
@@ -44,7 +43,7 @@ function widther(l,ctx){
         } 
 }
 
-function palletegen(img){
+function palletegen(){
 const imger = new Image();
 imger.src = 'assets/basic-palette.png';
 
@@ -113,12 +112,10 @@ function parseDate(rd) {
 async function imageGen(cover,artist,album,tracks,rd,al,code) {
   const canvas = document.createElement('canvas');
     canvas.id = 'Poster'
-    const cover1 = document.createElement('img')
-    cover1.src = cover.src;
-    const img = new Image(2480, 3508);
+    //const cover1 = document.createElement('img')
+   // cover1.src = cover;
     const ctx = canvas.getContext('2d')
     let y_lim = 3145
-    console.log(Cover)
     rd = parseDate(rd)
     al = parseTime(al)
     tracks = parseTracks(tracks)
@@ -127,19 +124,24 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black'
-    // ctx.drawImage(cover1, 162, 112, 2100, 2100);
-    await fetch(cover1.src)
-      .then(response => response.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const img = new Image();
-        img.onload = function() {
-          //cover needs to be 2100x2100
-          ctx.drawImage(img, 162, 112, 2100, 2100);
-        };
-    img.src = url;
-    });
-    
+    await new Promise((resolve, reject) => {
+      console.log(cover)
+        const image = new Image();
+        image.crossOrigin = ''
+        image.src = cover;
+        image.onload = () => {ctx.drawImage(image, 162, 112, 2100, 2100);
+                              resolve(image)};
+        image.onerror = () => reject('Image loading failed');
+      });
+      await new Promise((resolve, reject) => {
+        console.log(cover)
+          const image2 = new Image();
+          image2.crossOrigin = ''
+          image2.src = 'src/assets/basic-palette.png';
+          image2.onload = () => {ctx.drawImage(image2,159, 2560);
+                                resolve(image2)};
+          image2.onerror = () => reject('Image loading failed');
+        });
     ctx.textAlign = 'left';
     ctx.font = '500 3.5in Metro';
     ctx.fillText(artist, 165, 2470, 2100);
@@ -202,7 +204,16 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         ctx.font = '400 .65in Metro';
         ctx.fillText(rd,136,3345);
         ctx.fillText(al,897,3345);
-       // ctx.drawImage(code, 1963, 3300, code.width, code.height) //code needs to be 340x84
+        await new Promise((resolve, reject) => {
+          console.log(code)
+            const image1 = new Image();
+            image1.crossOrigin = ''
+            image1.src = code;
+            image1.onload = () => {ctx.drawImage(image1, 1963, 3300, 340, 84);
+                                  resolve(image1)};
+            image1.onerror = () => reject('Image loading failed');
+          });
+         //code needs to be 340x84
         const dataUrl = canvas.toDataURL('image/png');
         pos = 1;
         return dataUrl
