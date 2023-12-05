@@ -198,18 +198,20 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         //bottom stuff
         ctx.font = '500 .6in Metro';
         ctx.fillText('Release Date',136,3275);
-        ctx.fillText('Album Length',897,3275);
+        ctx.fillText('Album Length',1000,3275);
         ctx.font = '500 1in Metro';
-        ctx.fillText(album,1963,3275,500);
+        ctx.textAlign = "right";
+        ctx.fillText(album,(1930 + 340),3275,500);
+        ctx.textAlign = "left";
         ctx.font = '400 .65in Metro';
         ctx.fillText(rd,136,3345);
-        ctx.fillText(al,897,3345);
+        ctx.fillText(al,1000,3345);
         await new Promise((resolve, reject) => {
           console.log(code)
             const image1 = new Image();
             image1.crossOrigin = ''
             image1.src = code;
-            image1.onload = () => {ctx.drawImage(image1, 1963, 3300, 340, 84);
+            image1.onload = () => {ctx.drawImage(image1, 1930, 3300, 340, 84);
                                   resolve(image1)};
             image1.onerror = () => reject('Image loading failed');
           });
