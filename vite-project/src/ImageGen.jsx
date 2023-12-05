@@ -115,7 +115,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
     //const cover1 = document.createElement('img')
    // cover1.src = cover;
     const ctx = canvas.getContext('2d')
-    let y_lim = 3145
+    let y_lim = 3145+48
     rd = parseDate(rd)
     al = parseTime(al)
     tracks = parseTracks(tracks)
@@ -129,45 +129,34 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         const image = new Image();
         image.crossOrigin = ''
         image.src = cover;
-        image.onload = () => {ctx.drawImage(image, 160, 112, 2100, 2100);
+        image.onload = () => {ctx.drawImage(image, 160, 160, 2160, 2160);
                               resolve(image)};
         image.onerror = () => reject('Image loading failed');
       });
-      // await new Promise((resolve, reject) => {
-      //   console.log(cover)
-      //     const image2 = new Image();
-      //     image2.crossOrigin = ''
-      //     image2.src = 'src/assets/ColorPalette.png';
-      //     image2.onload = () => {ctx.drawImage(image2,159, 2560);
-      //                           resolve(image2)};
-      //     image2.onerror = () => reject('Image loading failed');
-      //   });
     ctx.textAlign = 'left';
-    ctx.font = '500 3.5in Metro';
-    ctx.fillText(artist, 160, 2470, 2100);
+    ctx.font = '500 2.8in Metro';
+    ctx.fillText(artist, 160, (2490+48), 2160);
     ctx.font = '500 2.2in Metro';
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 15.6;
     // guideing line 1
     ctx.beginPath();
-    ctx.moveTo(160, 2545);//2545
-    ctx.lineTo(2265,2545);//2545
-    //let color = palletegen(cover)
-   // ctx.drawImage(color, 159, 2560, color.width, color.height) //pallete needs to be 1185x144
-    ctx.fillText(album, 159, 2711, 2000);
+    ctx.moveTo(160, 2545+48);//2545
+    ctx.lineTo(2320,2545+48);//2545
+    ctx.fillText(album, 160, 2711+48, 2000);
     // Tracklisting gen
     const l = upper(tracks)
     let x = 160
-    let y = 2795
+    let y = 2795+48
     while(l.length != 0){ 
         let w = widther(l,ctx)
         for (let i = 0; i < w.length; i++){
           ctx.font = '500 .65in Metro'
-          ctx.fillText(pos, x, y)
+          ctx.fillText(pos, x, y+48)
           ctx.font = '400 .65in Metro'
           if (pos < 10){
-          ctx.fillText(w[i], x+50, y);} else{
-            ctx.fillText(w[i], x+75, y)
+          ctx.fillText(w[i], x+50, y+48);} else{
+            ctx.fillText(w[i], x+75, y+48)
           }
           pos++
           x += ctx.measureText((pos-1) + ' ' + w[i]).width+30
@@ -177,7 +166,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
           ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(160, y+30);
-        ctx.lineTo(2265,y+30);
+        ctx.lineTo(2320,y+30);
          ctx.stroke();
           break;
         }
@@ -187,7 +176,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
             ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(160, y_lim);
-        ctx.lineTo(2265,y_lim);
+        ctx.lineTo(2320,y_lim);
         ctx.stroke()
               break;
             }
@@ -197,21 +186,21 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         }
         //bottom stuff
         ctx.font = '500 .6in Metro';
-        ctx.fillText('Release Date',160,3275);
-        ctx.fillText('Album Length',1000,3275);
+        ctx.fillText('Release Date',160,3275+48);
+        ctx.fillText('Album Length',1000,3275+48);
         ctx.font = '500 1in Metro';
         ctx.textAlign = "right";
-        ctx.fillText(album,(1930 + 340),3275,500);
+        ctx.fillText(album,2320,3275+48,500);
         ctx.textAlign = "left";
         ctx.font = '400 .65in Metro';
-        ctx.fillText(rd,160,3345);
-        ctx.fillText(al,1000,3345);
+        ctx.fillText(rd,160,3345+48);
+        ctx.fillText(al,1000,3345+48);
         await new Promise((resolve, reject) => {
           console.log(code)
             const image1 = new Image();
             image1.crossOrigin = ''
             image1.src = code;
-            image1.onload = () => {ctx.drawImage(image1, 1930, 3300, 340, 84);
+            image1.onload = () => {ctx.drawImage(image1, 1930, 3300+48, 340, 84);
                                   resolve(image1)};
             image1.onerror = () => reject('Image loading failed');
           });
