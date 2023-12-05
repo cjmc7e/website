@@ -152,11 +152,11 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
         let w = widther(l,ctx)
         for (let i = 0; i < w.length; i++){
           ctx.font = '500 .65in Metro'
-          ctx.fillText(pos, x, y+48)
+          ctx.fillText(pos, x, y)
           ctx.font = '400 .65in Metro'
           if (pos < 10){
-          ctx.fillText(w[i], x+50, y+48);} else{
-            ctx.fillText(w[i], x+75, y+48)
+          ctx.fillText(w[i], x+50, y);} else{
+            ctx.fillText(w[i], x+75, y)
           }
           pos++
           x += ctx.measureText((pos-1) + ' ' + w[i]).width+30
@@ -170,7 +170,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
          ctx.stroke();
           break;
         }
-          if (y >= 3045){
+          if (y >= 3045 + 48){
             
             ctx.fillText('...',x,y)
             ctx.stroke();
