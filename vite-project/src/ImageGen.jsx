@@ -143,7 +143,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
     ctx.beginPath();
     ctx.moveTo(160, 2545+48);//2545
     ctx.lineTo(2320,2545+48);//2545
-    ctx.fillText(album, 160, 2711+48, 2000);
+    ctx.fillText(album, 160, 2711+48, 2160);
     // Tracklisting gen
     const l = upper(tracks)
     let x = 160
@@ -200,7 +200,7 @@ async function imageGen(cover,artist,album,tracks,rd,al,code) {
             const image1 = new Image();
             image1.crossOrigin = ''
             image1.src = code;
-            image1.onload = () => {ctx.drawImage(image1, 1930, 3300+48, 340, 84);
+            image1.onload = () => {ctx.drawImage(image1, 1995, 3300+48, 340, 84);
                                   resolve(image1)};
             image1.onerror = () => reject('Image loading failed');
           });
